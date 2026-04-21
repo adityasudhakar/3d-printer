@@ -31,3 +31,11 @@ Recreated assembly render:
 Alternate assembly render:
 
 ![Candy dispenser assembly render 2](assembly-view-2.png)
+
+## Wireframe Views
+
+Wireframe-style views of the recreated assembly:
+
+![Candy dispenser wireframe view 1](assembly-wireframe-1.png)
+
+![Candy dispenser wireframe view 2](assembly-wireframe-2.png)
