@@ -17,11 +17,8 @@ It combines printer setup notes, simple OpenSCAD models, exported print assets, 
 ## Repo Contents
 
 - `3d_printer_notes.md`: setup notes and lessons from getting the Ender 3 running
-- `m5_practice_block.scad`: simple captive-nut practice block for an `M5` nut and bolt
-- `flanged_nut_side_load_block.scad`: parameterized side-load block for a larger flanged nut
-- `flanged_nut_side_load_block.stl`: exported mesh for slicing
-- `flanged_nut_side_load_block.gcode`: sliced print file for the Ender 3
-- `flanged-nut-side-load-block.jpg`: printed test fit of the side-load flanged nut block
+- `flanged nut/`: early OpenSCAD practice around a flanged-nut side-load block and a simple `M5` practice part
+- `candy dispenser/`: AI-recreated candy dispenser CAD, print exports, and assembly images
 
 ## Workflow
 
@@ -44,10 +41,11 @@ The current setup notes are in [3d_printer_notes.md](/Users/adityasudhakar/3d-pr
 
 - learn how bolt and nut geometry maps into simple printed parts
 - use AI to help draft and revise `OpenSCAD` models
+- recreate simple mechanisms from reference images using AI-assisted CAD iteration
 - iterate on practical print issues like fit, first-layer adhesion, and slicer temperatures
 
 ## Print Photo
 
 Printed flanged nut side-load block test:
 
-![Printed flanged nut side-load block](flanged-nut-side-load-block.jpg)
+![Printed flanged nut side-load block](flanged%20nut/flanged-nut-side-load-block.jpg)

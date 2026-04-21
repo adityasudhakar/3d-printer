@@ -1,4 +1,4 @@
-// Side-load practice block for a flanged plastic nut.
+//// Side-load practice block for a flanged plastic nut.
 //
 // Based on the nut dimensions provided:
 // - flange diameter: 34 mm

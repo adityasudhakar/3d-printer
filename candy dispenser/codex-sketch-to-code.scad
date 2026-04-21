@@ -3,11 +3,15 @@ $fn = 96;
 // Toggle the default view.
 show_assembly = true;
 show_print_layout = false;
+show_base_only = false;
+show_body_only = false;
+show_cover_only = false;
+show_roller_only = false;
 
 // Candy and printer assumptions.
 candy_d = 15;
-fit_clearance = 0.20;          // Friction-fit clearance per side for the cover plug.
-rotating_clearance = 0.30;     // Radial running clearance around the roller.
+fit_clearance = 0.25;          // Friction-fit clearance per side for the cover plug.
+rotating_clearance = 0.40;     // Radial running clearance around the roller.
 
 // Overall envelope.
 overall_w = 50;
@@ -36,8 +40,8 @@ roller_handle_extension = 14;
 roller_len = body_w + 2 * roller_handle_extension;
 roller_hole_d = roller_d + 2 * rotating_clearance;
 scoop_d = 16.5;
-scoop_len = inner_w - 1.0;
-scoop_center_lift = 4.0;       // Offsets the scoop upward to avoid a paper-thin shell.
+scoop_len = inner_w - 15.0;
+scoop_center_lift = 4.5;       // Offsets the scoop upward to avoid a paper-thin shell.
 
 // Vertical placement.
 body_z = base_t;
@@ -49,7 +53,8 @@ slide_count = 5;
 slide_t = 3;
 slide_depth = channel_d - 2.0;
 slide_margin = 8;
-slide_run = inner_w - slide_margin;
+slide_length_scale = 0.9;
+slide_run = (inner_w - slide_margin) * slide_length_scale;
 slide_angle = 22;
 slide_drop = slide_run * sin(slide_angle);
 roller_to_slide_gap = 15;
@@ -63,18 +68,42 @@ last_slide_end_x = (side_t - 0.4) + slide_run * cos(slide_angle);
 // Base.
 base_front_margin = 30;
 base_d = body_d + base_front_margin;
+trough_w = overall_w - 2 * side_t - 4;
+trough_l = 50;
+trough_point_z = base_t - 15;
+trough_x = (overall_w - trough_w) / 2;
 
 // Cover plug.
 cover_plug_h = 12;
 cover_plug_w = inner_w - 2 * fit_clearance;
 cover_plug_d = channel_d - 2 * fit_clearance;
 
+module trough_prism_origin() {
+    // Maps local polygon/extrude axes [u, v, w] to global [x, y, z] = [w, u, v].
+    // That gives an X-axis prism from a Y-Z triangle.
+    multmatrix([
+        [0, 0, 1, 0],
+        [1, 0, 0, 0],
+        [0, 1, 0, 0],
+        [0, 0, 0, 1]
+    ])
+        linear_extrude(height = trough_w)
+        polygon(points = [
+            [0, trough_point_z],
+            [0, base_t],
+            [trough_l, base_t]
+        ]);
+}
+
 module base_plate() {
     color([0.96, 0.64, 0.05])
     difference() {
         cube([overall_w, base_d, base_t]);
-        translate([trough_x, trough_y, trough_z])
-            trough_wedge_origin();
+        translate([trough_x, 0, 2])
+            translate([trough_w / 2, trough_l / 2, (trough_point_z + base_t) / 2])
+            rotate([180, 180, 0])
+            translate([-trough_w / 2, -trough_l / 2, -(trough_point_z + base_t) / 2])
+            trough_prism_origin();
     }
 }
 
@@ -176,10 +205,16 @@ module print_layout_view(spacing = 10) {
         roller_part();
 }
 
-if (show_assembly) {
+if (show_base_only) {
+    base_plate();
+} else if (show_body_only) {
+    body_part();
+} else if (show_cover_only) {
+    cover_plate();
+} else if (show_roller_only) {
+    roller_part();
+} else if (show_assembly) {
     assembly_view();
-}
-
-if (show_print_layout) {
+} else if (show_print_layout) {
     print_layout_view();
 }
