@@ -30,7 +30,7 @@ It combines printer setup notes, simple OpenSCAD models, exported print assets, 
 
 ## Notes From Setup
 
-The current setup notes are in [3d_printer_notes.md](/Users/adityasudhakar/3d-printer/3d_printer_notes.md). The short version:
+The current setup notes are in [3d_printer_notes.md](3d_printer_notes.md). The short version:
 
 - the printer is a used `Ender 3`
 - bed leveling was a critical early fix
@@ -49,3 +49,7 @@ The current setup notes are in [3d_printer_notes.md](/Users/adityasudhakar/3d-pr
 Printed flanged nut side-load block test:
 
 ![Printed flanged nut side-load block](flanged%20nut/flanged-nut-side-load-block.jpg)
+
+## Rotated CAD View (peek into side slot)
+
+![Rotated CAD view (peek into side slot)](renders/flanged_peek_z270_x80.png)
